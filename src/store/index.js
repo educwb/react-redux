@@ -1,7 +1,9 @@
 import {createStore} from 'redux'
 
 const INITIAL_STATE = {
-  data: []
+  tasks: [
+    'Estudar React.js'
+  ]
 }
 
 //REDUCER
@@ -10,10 +12,16 @@ function todo(state = INITIAL_STATE, action) {
     case 'ADD_TASK':
       return {
         ...state,
-        data: [
-          ...state.data,
+        tasks: [
+          ...state.tasks,
           action.payload
         ]
+      }
+
+    case 'REMOVE_TASK':
+      const newState = state.tasks.filter(task => task !== action.payload)
+      return {
+        tasks: newState
       }
 
     default:
